@@ -32,7 +32,7 @@ public class Main {
     //--------------------------------menu------------------------------------------
     public void menu() throws Exception {
         Scanner in = new Scanner(System.in);
-        char choice;
+        char choice = -1;
 
         System.out.println("---------------------------");
         System.out.println("            Menu");
@@ -40,14 +40,28 @@ public class Main {
 
         System.out.println("Enter 1 to get instructions\nEnter 2 to Solve\nEnter 3 to exit");
         System.out.print("Choice: ");
-        choice = console.nextLine().charAt(0);
 
+        do {
+            try {
+                choice = in.nextLine().charAt(0);
+            } catch (Exception e) {
+                System.out.println("Invalid entry! You can only enter (1/2/3)");
+                System.out.println("You will be redirected to the menu...");
+                pause();
+                clear();
+                menu();
+            }//end of try catch
+
+            if(choice != '1' && choice != '2' && choice != '3'){
+                System.out.println("Invalid entry! You can only enter (1/2/3)");
+                System.out.print("Choice: ");
+            }//end of if statment
+
+        }while(choice != '1' && choice != '2' && choice != '3');//end of do-while loop
         clear();
 
         switch(choice){
             case '1':
-                System.out.println("Every time you start a game a random word from a word bank is chosen.");
-                System.out.println("You may guess letter by letter and everytime a wrong charcter is guess a bodypart is added to your haning man");
 
                 pause();
 
@@ -70,6 +84,23 @@ public class Main {
                 break;
         }
     }
+
+    /**
+     * This method will pause the program
+     */
+    public void pause(){
+        Scanner in = new Scanner(System.in);
+        System.out.println("Press the ENTER key to continue!");
+        in.nextLine();
+    }//end of method pause
+
+    /**
+     * The method will simulate the clearing of the screen by
+     * printing a bunch of new line characters
+     */
+    public void clear(){
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    }//end of method clear
 
     /**
      * This method controls all of the maze solving operations
