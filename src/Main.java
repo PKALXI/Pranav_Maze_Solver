@@ -6,6 +6,16 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
+/*
+* THINGS TO DO
+* MAKE THE MENU NICER
+* MAKE THE INSTRUCTIONS
+* MAKE THE EXIT
+* MAKE THE TITLE SCREEN FOR THE MAZE SOLVER
+* ASK SHARLEEN IF I HAVE TO TELL USER THE ERROR THEY MADE
+* CREATE MAZE GENERATOR
+* */
+
 public class Main {
     //start node
     Integer [] startNode;
@@ -32,13 +42,13 @@ public class Main {
     //--------------------------------menu------------------------------------------
     public void menu() throws Exception {
         Scanner in = new Scanner(System.in);
-        char choice = -1;
+        char choice = 'm';
 
         System.out.println("---------------------------");
         System.out.println("            Menu");
         System.out.println("---------------------------\n\n");
 
-        System.out.println("Enter 1 to get instructions\nEnter 2 to Solve\nEnter 3 to exit");
+        System.out.println("Enter 1 to get instructions\nEnter 2 to go to the maze solver\nEnter 3 to exit");
         System.out.print("Choice: ");
 
         do {
@@ -55,13 +65,17 @@ public class Main {
             if(choice != '1' && choice != '2' && choice != '3'){
                 System.out.println("Invalid entry! You can only enter (1/2/3)");
                 System.out.print("Choice: ");
-            }//end of if statment
+            }//end of if statement
 
         }while(choice != '1' && choice != '2' && choice != '3');//end of do-while loop
+
+        //clear the screen
         clear();
 
+        //go to the appropriate place
         switch(choice){
             case '1':
+                instructions();
 
                 pause();
 
@@ -72,9 +86,7 @@ public class Main {
                 break;
 
             case '2':
-                fillLetters();
-
-                playGame();
+                mazeSolverControl();
 
                 clear();
                 break;
@@ -83,6 +95,12 @@ public class Main {
                 exit();
                 break;
         }
+    }
+
+    public void exit() {
+    }
+
+    public void instructions() {
     }
 
     /**
