@@ -31,10 +31,9 @@ public class Main {
      * The constructor method
      */
     public Main() throws Exception {
-        mazeSolverControl();
         while (true) {
-            //menu
-            break;
+            //go to the menu
+            menu();
         }//end of while loop
     }//end of constructor method
 
