@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -7,21 +8,19 @@ import java.util.Scanner;
 import java.util.Set;
 
 /*
-* THINGS TO DO
-* MAKE THE MENU NICER
-* MAKE THE INSTRUCTIONS
-* MAKE THE EXIT
-* MAKE THE TITLE SCREEN FOR THE MAZE SOLVER
-* ASK SHARLEEN IF I HAVE TO TELL USER THE ERROR THEY MADE
-* CREATE MAZE GENERATOR
-* */
+ * THINGS TO DO
+ * MAKE THE INSTRUCTIONS
+ * MAKE THE EXIT
+ * MAKE THE TITLE SCREEN FOR THE MAZE SOLVER
+ * CREATE MAZE GENERATOR
+ * */
 
 public class Main {
     //start node
-    Integer [] startNode;
+    Integer[] startNode;
 
     //target node
-    Integer [] endNode;
+    Integer[] endNode;
 
     public static void main(String[] args) throws Exception {
         //call constructor method
@@ -39,22 +38,33 @@ public class Main {
         }//end of while loop
     }//end of constructor method
 
-    //--------------------------------menu------------------------------------------
+    /**
+     * This method displays the menu screen
+     * @throws Exception
+     */
     public void menu() throws Exception {
+        //Scanner to get input
         Scanner in = new Scanner(System.in);
-        char choice = 'm';
 
+        //store the the value of input
+        char choice = 'e';
+
+        //display the menu header
         System.out.println("---------------------------");
         System.out.println("            Menu");
         System.out.println("---------------------------\n\n");
 
-        System.out.println("Enter 1 to get instructions\nEnter 2 to go to the maze solver\nEnter 3 to exit");
+        //display the options
+        System.out.println("Enter 1 to get instructions\nEnter 2 to go to the maze solver\nEnter 3 to Generate a maze\nEnter 4 to exit");
         System.out.print("Choice: ");
 
+        //do while loop to get valid input
         do {
             try {
+                //get input for what user wants to do
                 choice = in.nextLine().charAt(0);
             } catch (Exception e) {
+                //catch invalid input
                 System.out.println("Invalid entry! You can only enter (1/2/3)");
                 System.out.println("You will be redirected to the menu...");
                 pause();
@@ -62,51 +72,80 @@ public class Main {
                 menu();
             }//end of try catch
 
-            if(choice != '1' && choice != '2' && choice != '3'){
+            //if statement to catch invalid character
+            if (choice != '1' && choice != '2' && choice != '3' && choice != '4') {
                 System.out.println("Invalid entry! You can only enter (1/2/3)");
                 System.out.print("Choice: ");
             }//end of if statement
 
-        }while(choice != '1' && choice != '2' && choice != '3');//end of do-while loop
+        } while (choice != '1' && choice != '2' && choice != '3' && choice != '4');//end of do-while loop
 
         //clear the screen
         clear();
 
         //go to the appropriate place
-        switch(choice){
+        switch (choice) {
             case '1':
+                //go to the instructions page
                 instructions();
 
+                //pause the program
                 pause();
 
+                //clear the screen
                 clear();
-
-                menu();
 
                 break;
 
             case '2':
+                //go to the maze solving section of the program
                 mazeSolverControl();
 
+                //clear the screen
                 clear();
-                break;
 
+                break;
             case '3':
-                exit();
+                //go to maze create control
+                mazeCreatorControl();
+
+                //clear the screen
+                clear();
+
                 break;
-        }
+            case '4':
+                //exit the program
+                exit();
+
+                break;
+        }//end of switch statement
+    }//end of method menu
+
+    /**
+     * This method controls all of the maze creation operations
+     */
+    public void mazeCreatorControl() {
     }
 
-    public void exit() {
-    }
+    /**
+     * This method exits the program
+     * @throws IOException
+     */
+    public void exit() throws IOException {
+        //close the scanner input stream
+        System.in.close();
+    }//edn of method exit
 
+    /**
+     * Display a instructions screen
+     */
     public void instructions() {
-    }
+    }//end of method instructions
 
     /**
      * This method will pause the program
      */
-    public void pause(){
+    public void pause() {
         Scanner in = new Scanner(System.in);
         System.out.println("Press the ENTER key to continue!");
         in.nextLine();
@@ -116,7 +155,7 @@ public class Main {
      * The method will simulate the clearing of the screen by
      * printing a bunch of new line characters
      */
-    public void clear(){
+    public void clear() {
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }//end of method clear
 
@@ -137,27 +176,28 @@ public class Main {
         createAdjacencyList(adjacencyList, maze);
 
         //array to store previously visited nodes
-        int [] prev = bfs(adjacencyList, maze);
+        int[] prev = bfs(adjacencyList, maze);
 
         //retrace the path if prev does not equal null
         //else print impossible maze
-        if(prev != null) {
+        if (prev != null) {
             String[][] stringMaze = retrace(prev, maze);
             printMaze(stringMaze, maze);
-        }else {
+        } else {
             System.out.println("This maze is impossible!");
         }//end of if-else statements
     }//end of method mazeSolverControl
 
     /**
      * This method retraces the shortest path and stores it in a String array
+     *
      * @param prev Array with each nodes previous node
      * @param maze The maze from which the shortest path is being derived
      * @return a String array with the shortest path
      */
-    public String [] [] retrace(int[] prev, int [] [] maze) {
+    public String[][] retrace(int[] prev, int[][] maze) {
         //String version of maze in which shortest path will be stored
-        String [] [] mazeCopy = new String[maze.length][maze[0].length];
+        String[][] mazeCopy = new String[maze.length][maze[0].length];
 
         //Value of start and end nodes
         int startNodeVal = maze[startNode[0]][startNode[1]] - 1;
@@ -171,9 +211,9 @@ public class Main {
         //and initialize it to the value of the end node
         int previousNode = endNodeVal;
 
-        while(true){
+        while (true) {
             //if last node was the start node break the while loop
-            if(previousNode == startNodeVal){
+            if (previousNode == startNodeVal) {
                 break;
             }//end of if statement
 
@@ -181,19 +221,19 @@ public class Main {
             int nextNode = prev[previousNode] + 1;
 
             //for loop to go through the maze and find the target node (nextNode)
-            for(int i = 0; i < maze.length; i++){
+            for (int i = 0; i < maze.length; i++) {
                 boolean bool = false;
-                for(int j = 0; j < maze[i].length; j++){
+                for (int j = 0; j < maze[i].length; j++) {
                     //check if this element is equal to the target node (nextNode)
-                    if(maze[i][j] == nextNode){
+                    if (maze[i][j] == nextNode) {
                         mazeCopy[i][j] = "X";
-                        previousNode = nextNode-1;
+                        previousNode = nextNode - 1;
                         bool = true;
                     }//end of if statement
                 }//end of for loop going through columns
 
                 //if target node has been found then break the loop
-                if(bool)break;
+                if (bool) break;
             }//end of for loop going through rows
         }//end of while loop
 
@@ -204,19 +244,20 @@ public class Main {
 
     /**
      * Perform and visualize a Breadth First Search on the adjacency list representing the maze passed in
+     *
      * @param adjacencyList The adjecency list of the maze
-     * @param maze the maze on which the search is being performed
+     * @param maze          the maze on which the search is being performed
      * @return A array storing each node previously visited node or null is maze is impossible
      */
-    public int[] bfs(HashMap<Integer, Set<Integer[]>> adjacencyList, int [] [] maze) throws Exception {
+    public int[] bfs(HashMap<Integer, Set<Integer[]>> adjacencyList, int[][] maze) throws Exception {
         //store visited nodes
-        ArrayList<Integer>visited = new ArrayList<>();
+        ArrayList<Integer> visited = new ArrayList<>();
 
         //store node visited before
-        int [] prev = new int [maze.length*maze[0].length];
+        int[] prev = new int[maze.length * maze[0].length];
 
         //The queue of nodes
-        ArrayList <Integer[]> queue = new ArrayList<>();
+        ArrayList<Integer[]> queue = new ArrayList<>();
 
         //add start node to the queue
         queue.add(startNode);
@@ -225,32 +266,32 @@ public class Main {
         boolean success = false;
 
         //Breadth First Search
-        while(queue.size() > 0){
-            Integer [] currentNode = queue.remove(0);
+        while (queue.size() > 0) {
+            Integer[] currentNode = queue.remove(0);
             int nodeVal = maze[currentNode[0]][currentNode[1]];
             visited.add(nodeVal);
 
             //check if current node is the end node
-            if(Arrays.equals(currentNode, endNode)){
+            if (Arrays.equals(currentNode, endNode)) {
                 success = true;
                 break;
             }//end of if
 
             //add the neighbours to the queue
-            for(Integer [] neighbour : adjacencyList.get(nodeVal)){
+            for (Integer[] neighbour : adjacencyList.get(nodeVal)) {
                 int node = maze[neighbour[0]][neighbour[1]];
 
                 //check if node has been visited or not
-                if(!(visited.contains(node))) {
+                if (!(visited.contains(node))) {
                     queue.add(neighbour);
                     visited.add(node);
-                    prev[node-1] = nodeVal-1;
+                    prev[node - 1] = nodeVal - 1;
                 }//end of if to add neighbours
             }//end if for loop to go through neighbours
         }//end of while loop
 
         //return null is maze is not possible
-        if(!success) {
+        if (!success) {
             return null;
         }//end of if statement
 
@@ -259,10 +300,10 @@ public class Main {
     }//end of method bfs
 
     //DELETE AFTER COMPLETE
-    public void printList(HashMap<Integer, Set<Integer[]>> adjacencyList){
-        for(Integer key : adjacencyList.keySet()){
+    public void printList(HashMap<Integer, Set<Integer[]>> adjacencyList) {
+        for (Integer key : adjacencyList.keySet()) {
             System.out.print("Key: " + key + " Value ");
-            for(Integer [] arr : adjacencyList.get(key)){
+            for (Integer[] arr : adjacencyList.get(key)) {
                 System.out.print(Arrays.toString(arr));
             }
             System.out.println();
@@ -271,8 +312,9 @@ public class Main {
 
     /**
      * This method stores a adjacency list in a HashMap that is passed in based on the passed in grid
+     *
      * @param adjacencyList The HashMap in which the adjacency list is to be stored
-     * @param maze The maze on which the adjacency list should be based upon
+     * @param maze          The maze on which the adjacency list should be based upon
      */
     public void createAdjacencyList(HashMap<Integer, Set<Integer[]>> adjacencyList, int[][] maze) {
         //All possible moves from any spot
@@ -336,6 +378,7 @@ public class Main {
 
     /**
      * This method reads the maze on the specified file path and prints it as it reads
+     *
      * @param filePath the path to the file in which the maze is
      * @return a 2D integer array containing the maze
      * @throws Exception
@@ -381,11 +424,11 @@ public class Main {
                     maze[i][j] = -1;
                 } else if (c == 'S') {
                     maze[i][j] = nodeNumber;
-                    startNode = new Integer[]{i,j};
+                    startNode = new Integer[]{i, j};
                     nodeNumber++;
                 } else if (c == 'E') {
                     maze[i][j] = nodeNumber;
-                    endNode = new Integer[]{i,j};
+                    endNode = new Integer[]{i, j};
                     nodeNumber++;
                 }//end of if - else structure
 
@@ -406,20 +449,21 @@ public class Main {
 
     /**
      * This method prints a maze that is passed through
-     * @param maze The maze to be printed
+     *
+     * @param maze    The maze to be printed
      * @param intMaze The maze with integer nodes
      */
-    public void printMaze(String[][] maze, int [] [] intMaze) {
+    public void printMaze(String[][] maze, int[][] intMaze) {
         //Tell user this is the solution
         System.out.println("The solution to this maze is:");
         //print the maze
-        for(int i = 0; i < maze.length; i++){
-            for(int j = 0; j < maze[i].length; j++){
+        for (int i = 0; i < maze.length; i++) {
+            for (int j = 0; j < maze[i].length; j++) {
                 //Print appropriate symbol for each node
-                if (Arrays.equals(new Integer[]{i,j}, startNode)){
+                if (Arrays.equals(new Integer[]{i, j}, startNode)) {
                     System.out.print("S ");
                     continue;
-                }else if(Arrays.equals(new Integer[]{i,j}, endNode)){
+                } else if (Arrays.equals(new Integer[]{i, j}, endNode)) {
                     System.out.print("E ");
                     continue;
                 }//end of first if - else
@@ -428,10 +472,11 @@ public class Main {
                         System.out.print("X ");
                         continue;
                     }
-                }catch (Exception e){}
-                if(intMaze[i][j] == -1){
+                } catch (Exception e) {
+                }
+                if (intMaze[i][j] == -1) {
                     System.out.print("# ");
-                }else{
+                } else {
                     System.out.print(". ");
                 }//end of if else structure
             }//end of for loop going through columns
