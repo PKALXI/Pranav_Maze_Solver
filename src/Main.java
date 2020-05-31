@@ -65,10 +65,12 @@ public class Main {
             } catch (Exception e) {
                 //catch invalid input
                 System.out.println("Invalid entry! You can only enter (1/2/3)");
-                System.out.println("You will be redirected to the menu...");
-                pause();
-                clear();
-                menu();
+
+                //re prompt for input
+                System.out.print("Choice: ");
+
+                //skip iteration
+                continue;
             }//end of try catch
 
             //if statement to catch invalid character
@@ -185,6 +187,12 @@ public class Main {
         } else {
             System.out.println("This maze is impossible!");
         }//end of if-else statements
+
+        //pause the program
+        pause();
+
+        //clear the screen
+        clear();
     }//end of method mazeSolverControl
 
     /**
@@ -298,7 +306,7 @@ public class Main {
         return prev;
     }//end of method bfs
 
-    //DELETE AFTER COMPLETE
+    //DEV NOTE: DELETE AFTER COMPLETE
     public void printList(HashMap<Integer, Set<Integer[]>> adjacencyList) {
         for (Integer key : adjacencyList.keySet()) {
             System.out.print("Key: " + key + " Value ");
