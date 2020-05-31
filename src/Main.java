@@ -448,7 +448,6 @@ public class Main {
 
     /**
      * This method prints a maze that is passed through
-     *
      * @param maze    The maze to be printed
      * @param intMaze The maze with integer nodes
      */
