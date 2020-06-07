@@ -1,5 +1,7 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -125,8 +127,96 @@ public class Main {
     /**
      * This method controls all of the maze creation operations
      */
-    public void mazeCreatorControl() {
+    public void mazeCreatorControl() throws Exception {
+        //Scanner for input
+        Scanner in = new Scanner(System.in);
+
+        //prompt for amount of rows
+        System.out.print("How many rows do you want in the maze: ");
+        int rows = in.nextInt();
+
+        //prompt for amount of columns
+        System.out.print("How many columns do you want in the maze: ");
+        int cols = in.nextInt();
+
+        //pickup trailing whitespace
+        in.nextLine();
+
+        //create the maze
+        String [][] generatedMaze = new String [rows][cols];
+
+        //generate the maze
+        char happy = 'e';
+        do {
+            System.out.println("Here is a fresh maze I generated...");
+            createMaze(generatedMaze, rows, cols);
+
+            do {
+                System.out.print("Are you happy with this maze (y/n): ");
+                try {
+                    happy = in.nextLine().charAt(0);
+                }catch (Exception e){
+                    System.out.println("Invalid input! You can only enter y or n!");
+                    System.out.println("Try again!");
+                }//end of try catch statement
+
+                if(happy != 'n' && happy != 'y'){
+                    System.out.println("Invalid input! You can only enter y or n!");
+                    System.out.println("Try again!");
+                }//end of if statement
+
+            }while(happy != 'n' && happy != 'y');
+
+        }while(happy != 'y');
+
+        //Save maze
+        System.out.println("This maze is going to be saved for future use!");
+        pause();
+        saveMaze(generatedMaze);
+    }//end of method mazeCreatorControl
+
+    public void saveMaze(String[][] generatedMaze) throws Exception {
+        File file = new File("numberOfMaze.txt");
+        Scanner in = new Scanner(file);
+
+        int numOfFiles = in.nextInt() + 1;
+
+        String newFile = "MAZE" + (String.valueOf(numOfFiles)) + ".txt";
+
+        PrintWriter pw = new PrintWriter("numberOfMaze.txt");
+        pw.println(numOfFiles);
+        pw.close();
+
+        pw = new PrintWriter(newFile);
+        for(int i = 0; i < generatedMaze.length; i++){
+            for(int j = 0; j < generatedMaze[i].length; j++){
+                pw.print(generatedMaze[i][j]);
+            }
+            pw.println("");
+        }
+        pw.close();
     }
+
+    public void createMaze(String [][] generatedMaze, int rows, int cols) {
+        generatedMaze[0][0] = "S";
+        generatedMaze[rows-1][cols-1] = "E";
+
+        //go through the maze and print the random values put in
+        for(int i = 0; i < rows; i++){
+            for(int j = 0; j < cols; j++){
+                if((i == 0 && j == 0)||(i == rows-1 && j == cols-1)){
+                    System.out.print(generatedMaze[i][j]);
+                    continue;
+                }
+
+                int rand = (int)(Math.random()*3);
+
+                generatedMaze[i][j] = (rand == 2? "#":".");
+                System.out.print(generatedMaze[i][j]);
+            }
+            System.out.println("");
+        }
+    }//end of method createMaze
 
     /**
      * This method exits the program
