@@ -620,13 +620,10 @@ public class Main {
                         System.out.print("X ");
                         continue;
                     }
-                } catch (Exception e) {
-                }
-                if (intMaze[i][j] == -1) {
-                    System.out.print("# ");
-                } else {
-                    System.out.print(". ");
-                }//end of if else structure
+                } catch (Exception e) {}
+
+                //if node = -1 print # or else print .
+                System.out.print(intMaze[i][j] == -1? "# ":". ");
             }//end of for loop going through columns
 
             //move cursor to next line
