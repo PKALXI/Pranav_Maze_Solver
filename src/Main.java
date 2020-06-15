@@ -11,7 +11,6 @@ import java.util.Set;
 
 /*
  * THINGS TO DO
- * MAKE THE INSTRUCTIONS
  * MAKE THE EXIT
  * SPICE UP THE MENU?
  * */
@@ -40,6 +39,7 @@ public class Main {
 
     /**
      * This method displays the menu screen
+     *
      * @throws Exception
      */
     public void menu() throws Exception {
@@ -91,12 +91,6 @@ public class Main {
                 //go to the instructions page
                 instructions();
 
-                //pause the program
-                pause();
-
-                //clear the screen
-                clear();
-
                 break;
 
             case '2':
@@ -127,6 +121,13 @@ public class Main {
      * This method controls all of the maze creation operations
      */
     public void mazeCreatorControl() throws Exception {
+        //display title screen
+        mazeCreatorTitle();
+
+        //pause and clear the screen
+        pause();
+        clear();
+
         //Scanner for input
         Scanner in = new Scanner(System.in);
 
@@ -142,7 +143,7 @@ public class Main {
         in.nextLine();
 
         //create the maze
-        String [][] generatedMaze = new String [rows][cols];
+        String[][] generatedMaze = new String[rows][cols];
 
         //generate the maze
         char happy = 'e';//variable to check if the user is happy witht eh create maze
@@ -161,19 +162,19 @@ public class Main {
                 //make sure user enters a character
                 try {
                     happy = in.nextLine().charAt(0);
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println("Invalid input! You can only enter y or n!");
                     System.out.println("Try again!");
                 }//end of try catch statement
 
                 //make sure they only enter y or n
-                if(happy != 'n' && happy != 'y'){
+                if (happy != 'n' && happy != 'y') {
                     System.out.println("Invalid input! You can only enter y or n!");
                     System.out.println("Try again!");
                 }//end of if statement
 
-            }while(happy != 'n' && happy != 'y');//end of do while
-        }while(happy != 'y');//end of do while
+            } while (happy != 'n' && happy != 'y');//end of do while
+        } while (happy != 'y');//end of do while
 
         //Tell user maze is being saved
         System.out.println("This maze is going to be saved for future use!");
@@ -186,7 +187,23 @@ public class Main {
     }//end of method mazeCreatorControl
 
     /**
+     * This method displays the title screen for the maze creator
+     */
+    public void mazeCreatorTitle() {
+        //display title
+        System.out.println("'##::::'##::::'###::::'########:'########:::::'######::'########::'########::::'###::::'########::'#######::'########::");
+        System.out.println(" ###::'###:::'## ##:::..... ##:: ##.....:::::'##... ##: ##.... ##: ##.....::::'## ##:::... ##..::'##.... ##: ##.... ##:");
+        System.out.println(" ####'####::'##:. ##:::::: ##::: ##:::::::::: ##:::..:: ##:::: ##: ##::::::::'##:. ##::::: ##:::: ##:::: ##: ##:::: ##:");
+        System.out.println(" ## ### ##:'##:::. ##:::: ##:::: ######:::::: ##::::::: ########:: ######:::'##:::. ##:::: ##:::: ##:::: ##: ########::");
+        System.out.println(" ##. #: ##: #########::: ##::::: ##...::::::: ##::::::: ##.. ##::: ##...:::: #########:::: ##:::: ##:::: ##: ##.. ##:::");
+        System.out.println(" ##:.:: ##: ##.... ##:: ##:::::: ##:::::::::: ##::: ##: ##::. ##:: ##::::::: ##.... ##:::: ##:::: ##:::: ##: ##::. ##::");
+        System.out.println(" ##:::: ##: ##:::: ##: ########: ########::::. ######:: ##:::. ##: ########: ##:::: ##:::: ##::::. #######:: ##:::. ##:");
+        System.out.println("..:::::..::..:::::..::........::........::::::......:::..:::::..::........::..:::::..:::::..::::::.......:::..:::::..::");
+    }//end of method mazeCreatorTitle
+
+    /**
      * This method saves the maze passed in, into a text file
+     *
      * @param generatedMaze The maze you want to save
      */
     public void saveMaze(String[][] generatedMaze) throws Exception {
@@ -212,8 +229,8 @@ public class Main {
         pw.println(generatedMaze.length + " " + generatedMaze[0].length);
 
         //output the maze to the file
-        for(int i = 0; i < generatedMaze.length; i++){
-            for(int j = 0; j < generatedMaze[i].length; j++){
+        for (int i = 0; i < generatedMaze.length; i++) {
+            for (int j = 0; j < generatedMaze[i].length; j++) {
                 pw.print(generatedMaze[i][j]);
             }//end of for loop going through the columns
             pw.println("");
@@ -225,31 +242,32 @@ public class Main {
 
     /**
      * This method generates a random maze
+     *
      * @param generatedMaze The 2D array in which the maze will be stored
      * @param rows
      * @param cols
      */
-    public void createMaze(String [][] generatedMaze, int rows, int cols) {
+    public void createMaze(String[][] generatedMaze, int rows, int cols) {
         //plug in the starting point to the top left corner
         generatedMaze[0][0] = "S";
 
         //plug in the starting point to the bottom right corner
-        generatedMaze[rows-1][cols-1] = "E";
+        generatedMaze[rows - 1][cols - 1] = "E";
 
         //go through the maze and print the random values put in
-        for(int i = 0; i < rows; i++){
-            for(int j = 0; j < cols; j++){
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
                 //skip the top left cell and bottom left cell
-                if((i == 0 && j == 0)||(i == rows-1 && j == cols-1)){
+                if ((i == 0 && j == 0) || (i == rows - 1 && j == cols - 1)) {
                     System.out.print(generatedMaze[i][j]);
                     continue;
                 }//end of if statement
 
                 //pick a random number from 0-2
-                int rand = (int)(Math.random()*3);
+                int rand = (int) (Math.random() * 3);
 
                 //if the random integer equals to 2 put a wall else a open spot
-                generatedMaze[i][j] = (rand == 2? "#":".");
+                generatedMaze[i][j] = (rand == 2 ? "#" : ".");
 
                 //print the node
                 System.out.print(generatedMaze[i][j]);
@@ -262,17 +280,60 @@ public class Main {
 
     /**
      * This method exits the program
+     *
      * @throws IOException
      */
-    public void exit() throws IOException {
-        //close the scanner input stream
+    public void exit() throws Exception {
+        //display the header
+        System.out.println("'########:'##::::'##::::'###::::'##::: ##:'##:::'##::'######::'####:");
+        System.out.println("... ##..:: ##:::: ##:::'## ##::: ###:: ##: ##::'##::'##... ##: ####:");
+        System.out.println("::: ##:::: ##:::: ##::'##:. ##:: ####: ##: ##:'##::: ##:::..:: ####:");
+        System.out.println("::: ##:::: #########:'##:::. ##: ## ## ##: #####::::. ######::: ##::");
+        System.out.println("::: ##:::: ##.... ##: #########: ##. ####: ##. ##::::..... ##::..:::");
+        System.out.println("::: ##:::: ##:::: ##: ##.... ##: ##:. ###: ##:. ##::'##::: ##:'####:");
+        System.out.println("::: ##:::: ##:::: ##: ##:::: ##: ##::. ##: ##::. ##:. ######:: ####:");
+        System.out.println(":::..:::::..:::::..::..:::::..::..::::..::..::::..:::......:::....::");
+
+        //Display a message
+        System.out.println("Thanks for playing!");
+
+        //pause the screen
+        pause();
+
+        //close the input stream
         System.in.close();
-    }//edn of method exit
+
+        //exit the program
+        System.exit(0);
+    }//end of method exit
 
     /**
      * Display a instructions screen
      */
     public void instructions() {
+        //display the header
+        System.out.println("'####:'##::: ##::'######::'########:'########::'##::::'##::'######::'########:'####::'#######::'##::: ##::'######::");
+        System.out.println(". ##:: ###:: ##:'##... ##:... ##..:: ##.... ##: ##:::: ##:'##... ##:... ##..::. ##::'##.... ##: ###:: ##:'##... ##:");
+        System.out.println(": ##:: ####: ##: ##:::..::::: ##:::: ##:::: ##: ##:::: ##: ##:::..::::: ##::::: ##:: ##:::: ##: ####: ##: ##:::..::");
+        System.out.println(": ##:: ## ## ##:. ######::::: ##:::: ########:: ##:::: ##: ##:::::::::: ##::::: ##:: ##:::: ##: ## ## ##:. ######::");
+        System.out.println(": ##:: ##. ####::..... ##:::: ##:::: ##.. ##::: ##:::: ##: ##:::::::::: ##::::: ##:: ##:::: ##: ##. ####::..... ##:");
+        System.out.println(": ##:: ##:. ###:'##::: ##:::: ##:::: ##::. ##:: ##:::: ##: ##::: ##:::: ##::::: ##:: ##:::: ##: ##:. ###:'##::: ##:");
+        System.out.println("'####: ##::. ##:. ######::::: ##:::: ##:::. ##:. #######::. ######::::: ##::::'####:. #######:: ##::. ##:. ######::");
+        System.out.println("....::..::::..:::......::::::..:::::..:::::..:::.......::::......::::::..:::::....:::.......:::..::::..:::......:::");
+
+        //add line spaces
+        System.out.println("\n\n\n");
+
+        //The instructions
+        System.out.println("Welcome to the maze solver, in this program you can do a few thing!");
+        System.out.println("1. Maze Solver - The computer will pick a random maze from the txt files and solve it!");
+        System.out.println("The 'X's are the trail from the start to the finish.");
+        System.out.println("2. Maze Creator- The computer will generate a maze of the dimensions you enter and save it!");
+        System.out.println("*As the user you are not supposed to feed in your own txt files, this program reads the mazes in a special way*");
+
+        //pause and clear the screen
+        pause();
+        clear();
     }//end of method instructions
 
     /**
@@ -337,7 +398,7 @@ public class Main {
     /**
      * This is the title screen for the maze solver
      */
-    public void mazeSolverTitle(){
+    public void mazeSolverTitle() {
         System.out.println("'##::::'##::::'###::::'########:'########:::::'######:::'#######::'##:::::::'##::::'##:'########:'########::");
         System.out.println(" ###::'###:::'## ##:::..... ##:: ##.....:::::'##... ##:'##.... ##: ##::::::: ##:::: ##: ##.....:: ##.... ##:");
         System.out.println(" ####'####::'##:. ##:::::: ##::: ##:::::::::: ##:::..:: ##:::: ##: ##::::::: ##:::: ##: ##::::::: ##:::: ##:");
@@ -404,9 +465,8 @@ public class Main {
 
     /**
      * Perform and visualize a Breadth First Search on the adjacency list representing the maze passed in
-     *
-     * @param adjacencyList The adjecency list of the maze
-     * @param maze          the maze on which the search is being performed
+     * @param adjacencyList The adjacency list of the maze
+     * @param maze the maze on which the search is being performed
      * @return A array storing each node previously visited node or null is maze is impossible
      */
     public int[] bfs(HashMap<Integer, Set<Integer[]>> adjacencyList, int[][] maze) throws Exception {
@@ -589,6 +649,9 @@ public class Main {
             System.out.println();
         }//end of for loop going through each row
 
+        //pause the screen
+        pause();
+
         //Add 3 line spaces
         System.out.println("\n\n");
 
@@ -598,12 +661,14 @@ public class Main {
 
     /**
      * This method prints a maze that is passed through
+     *
      * @param maze    The maze to be printed
      * @param intMaze The maze with integer nodes
      */
     public void printMaze(String[][] maze, int[][] intMaze) {
         //Tell user this is the solution
         System.out.println("The solution to this maze is:");
+
         //print the maze
         for (int i = 0; i < maze.length; i++) {
             for (int j = 0; j < maze[i].length; j++) {
@@ -620,10 +685,11 @@ public class Main {
                         System.out.print("X ");
                         continue;
                     }
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                }
 
                 //if node = -1 print # or else print .
-                System.out.print(intMaze[i][j] == -1? "# ":". ");
+                System.out.print(intMaze[i][j] == -1 ? "# " : ". ");
             }//end of for loop going through columns
 
             //move cursor to next line
