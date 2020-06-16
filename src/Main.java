@@ -90,7 +90,6 @@ public class Main {
                 instructions();
 
                 break;
-
             case '2':
                 //go to the maze solving section of the program
                 mazeSolverControl();
