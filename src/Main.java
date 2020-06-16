@@ -469,9 +469,8 @@ public class Main {
 
     /**
      * Perform a Breadth First Search on the adjacency list representing the maze passed in
-     *
      * @param adjacencyList The adjacency list of the maze
-     * @param maze          the maze on which the search is being performed
+     * @param maze the maze on which the search is being performed
      * @return A array storing each node previously visited node or null is maze is impossible
      */
     public int[] bfs(HashMap<Integer, Set<Integer[]>> adjacencyList, int[][] maze) throws Exception {
