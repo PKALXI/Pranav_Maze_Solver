@@ -1,6 +1,5 @@
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.Exception;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,11 +8,13 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
-/*
- * THINGS TO DO
- * MAKE THE EXIT
- * SPICE UP THE MENU?
- * */
+/**
+ * This program solves mazes with breadth first search and creates mazes randomly
+ * Author: Pranav Kalsi
+ * Date Created: May 19th, 2020
+ * Last Modified: June 15th, 2020
+ * Assumptions: User doesn't input and files.
+ */
 
 public class Main {
     //start node
@@ -27,9 +28,6 @@ public class Main {
         new Main();
     }//end of main method
 
-    /**
-     * The constructor method
-     */
     public Main() throws Exception {
         while (true) {
             //go to the menu
@@ -161,7 +159,7 @@ public class Main {
 
                 //make sure user enters a character
                 try {
-                    happy = in.nextLine().charAt(0);
+                    happy = in.nextLine().toLowerCase().charAt(0);
                 } catch (Exception e) {
                     System.out.println("Invalid input! You can only enter y or n!");
                     System.out.println("Try again!");
@@ -191,14 +189,21 @@ public class Main {
      */
     public void mazeCreatorTitle() {
         //display title
-        System.out.println("'##::::'##::::'###::::'########:'########:::::'######::'########::'########::::'###::::'########::'#######::'########::");
-        System.out.println(" ###::'###:::'## ##:::..... ##:: ##.....:::::'##... ##: ##.... ##: ##.....::::'## ##:::... ##..::'##.... ##: ##.... ##:");
-        System.out.println(" ####'####::'##:. ##:::::: ##::: ##:::::::::: ##:::..:: ##:::: ##: ##::::::::'##:. ##::::: ##:::: ##:::: ##: ##:::: ##:");
-        System.out.println(" ## ### ##:'##:::. ##:::: ##:::: ######:::::: ##::::::: ########:: ######:::'##:::. ##:::: ##:::: ##:::: ##: ########::");
-        System.out.println(" ##. #: ##: #########::: ##::::: ##...::::::: ##::::::: ##.. ##::: ##...:::: #########:::: ##:::: ##:::: ##: ##.. ##:::");
-        System.out.println(" ##:.:: ##: ##.... ##:: ##:::::: ##:::::::::: ##::: ##: ##::. ##:: ##::::::: ##.... ##:::: ##:::: ##:::: ##: ##::. ##::");
-        System.out.println(" ##:::: ##: ##:::: ##: ########: ########::::. ######:: ##:::. ##: ########: ##:::: ##:::: ##::::. #######:: ##:::. ##:");
-        System.out.println("..:::::..::..:::::..::........::........::::::......:::..:::::..::........::..:::::..:::::..::::::.......:::..:::::..::");
+        System.out.println("'##::::'##::::'###::::'########:'########:");
+        System.out.println(" ###::'###:::'## ##:::..... ##:: ##.....::");
+        System.out.println(" ####'####::'##:. ##:::::: ##::: ##:::::::");
+        System.out.println(" ## ### ##:'##:::. ##:::: ##:::: ######:::");
+        System.out.println(" ##. #: ##: #########::: ##::::: ##...::::");
+        System.out.println(" ##:.:: ##: ##.... ##:: ##:::::: ##:::::::");
+        System.out.println(" ##:::: ##: ##:::: ##: ########: ########:");
+        System.out.println("..:::::..::..:::::..::........::........::");
+
+        System.out.println(" ##                      #                ");
+        System.out.println("#  #                     #                ");
+        System.out.println("#     ###    ##    ###  ###    ##   ###   ");
+        System.out.println("#     #  #  # ##  #  #   #    #  #  #  #  ");
+        System.out.println("#  #  #     ##    # ##   #    #  #  #     ");
+        System.out.println(" ##   #      ##    # #    ##   ##   #");
     }//end of method mazeCreatorTitle
 
     /**
@@ -280,8 +285,6 @@ public class Main {
 
     /**
      * This method exits the program
-     *
-     * @throws IOException
      */
     public void exit() throws Exception {
         //display the header
@@ -393,6 +396,13 @@ public class Main {
 
         //clear the screen
         clear();
+
+        //tell user they will be redirected to the menu
+        System.out.println("You will be redirected to the menu");
+
+        //pause and clear the screen
+        pause();
+        clear();
     }//end of method mazeSolverControl
 
     /**
@@ -470,6 +480,16 @@ public class Main {
      * @return A array storing each node previously visited node or null is maze is impossible
      */
     public int[] bfs(HashMap<Integer, Set<Integer[]>> adjacencyList, int[][] maze) throws Exception {
+        //tell user maze is being solved
+        System.out.print("Solving");
+        for(int i = 0; i < 3; i++){
+            Thread.sleep(500);
+            System.out.print(".");
+        }//end for loop
+
+        //move cursor to next line and add line spaces
+        System.out.println("\n\n\n");
+
         //store visited nodes
         ArrayList<Integer> visited = new ArrayList<>();
 
@@ -610,7 +630,7 @@ public class Main {
         int nodeNumber = 1;
 
         //Tell user this is the maze being solved
-        System.out.println("We are solving the following maze");
+        System.out.println("I selected this maze to solve!");
 
         //read file and create maze
         for (int i = 0; i < rows; i++) {
