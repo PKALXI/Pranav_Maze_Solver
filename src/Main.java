@@ -418,7 +418,6 @@ public class Main {
 
     /**
      * This method retraces the shortest path and stores it in a String array
-     *
      * @param prev Array with each nodes previous node
      * @param maze The maze from which the shortest path is being derived
      * @return a String array with the shortest path
@@ -677,7 +676,6 @@ public class Main {
 
     /**
      * This method prints a maze that is passed through
-     *
      * @param maze    The maze to be printed
      * @param intMaze The maze with integer nodes
      */
