@@ -693,8 +693,7 @@ public class Main {
                         System.out.print("X ");
                         continue;
                     }
-                } catch (Exception e) {
-                }
+                } catch (Exception e) {}
 
                 //if node = -1 print # or else print .
                 System.out.print(intMaze[i][j] == -1 ? "# " : ". ");
