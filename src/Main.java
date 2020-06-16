@@ -1,12 +1,5 @@
-import java.io.File;
-import java.io.Exception;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.io.*;
+import java.util.*;
 
 /**
  * This program solves mazes with breadth first search and creates mazes randomly
@@ -16,7 +9,7 @@ import java.util.Set;
  * Assumptions: User doesn't input any files.
  */
 
-public class Main {
+class Main {
     //start node
     Integer[] startNode;
 
@@ -179,6 +172,16 @@ public class Main {
 
         //save the maze
         saveMaze(generatedMaze);
+
+        //clear the screen
+        clear();
+
+        //tell user they willl be redirected to the menu
+        System.out.println("You will be redirected to the menu.");
+
+        //pause and clear the screen
+        pause();
+        clear();
     }//end of method mazeCreatorControl
 
     /**
@@ -348,7 +351,7 @@ public class Main {
      * printing a bunch of new line characters
      */
     public void clear() {
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }//end of method clear
 
     /**
