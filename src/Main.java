@@ -536,9 +536,8 @@ public class Main {
 
     /**
      * This method stores a adjacency list in a HashMap that is passed in based on the passed in grid
-     *
      * @param adjacencyList The HashMap in which the adjacency list is to be stored
-     * @param maze          The maze on which the adjacency list should be based upon
+     * @param maze The maze on which the adjacency list should be based upon
      */
     public void createAdjacencyList(HashMap<Integer, Set<Integer[]>> adjacencyList, int[][] maze) {
         //All possible moves from any spot
