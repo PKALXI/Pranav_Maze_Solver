@@ -13,7 +13,7 @@ import java.util.Set;
  * Author: Pranav Kalsi
  * Date Created: May 19th, 2020
  * Last Modified: June 15th, 2020
- * Assumptions: User doesn't input and files.
+ * Assumptions: User doesn't input any files.
  */
 
 public class Main {
