@@ -37,8 +37,6 @@ public class Main {
 
     /**
      * This method displays the menu screen
-     *
-     * @throws Exception
      */
     public void menu() throws Exception {
         //Scanner to get input
@@ -471,7 +469,7 @@ public class Main {
     }//end of method retrace
 
     /**
-     * Perform and visualize a Breadth First Search on the adjacency list representing the maze passed in
+     * Perform a Breadth First Search on the adjacency list representing the maze passed in
      * @param adjacencyList The adjacency list of the maze
      * @param maze the maze on which the search is being performed
      * @return A array storing each node previously visited node or null is maze is impossible
@@ -583,9 +581,7 @@ public class Main {
 
     /**
      * This method will return a random file path to one of the txt files that contain mazes
-     *
      * @return File path to one of the txt files
-     * @throws Exception
      */
     public String pickMaze() throws Exception {
         //setup file reader
@@ -604,10 +600,8 @@ public class Main {
 
     /**
      * This method reads the maze on the specified file path and prints it as it reads
-     *
      * @param filePath the path to the file in which the maze is
      * @return a 2D integer array containing the maze
-     * @throws Exception
      */
     public int[][] readMaze(String filePath) throws Exception {
         //setup file reader
