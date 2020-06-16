@@ -245,7 +245,6 @@ public class Main {
 
     /**
      * This method generates a random maze
-     *
      * @param generatedMaze The 2D array in which the maze will be stored
      * @param rows
      * @param cols
