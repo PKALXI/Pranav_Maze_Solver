@@ -205,6 +205,7 @@ public class Main {
 
     /**
      * This method saves the maze passed in, into a text file
+     *
      * @param generatedMaze The maze you want to save
      */
     public void saveMaze(String[][] generatedMaze) throws Exception {
@@ -243,9 +244,10 @@ public class Main {
 
     /**
      * This method generates a random maze
+     *
      * @param generatedMaze The 2D array in which the maze will be stored
-     * @param rows
-     * @param cols
+     * @param rows The amount of rows in the maze
+     * @param cols The amount of columns in the maze
      */
     public void createMaze(String[][] generatedMaze, int rows, int cols) {
         //plug in the starting point to the top left corner
@@ -470,14 +472,15 @@ public class Main {
 
     /**
      * Perform a Breadth First Search on the adjacency list representing the maze passed in
+     *
      * @param adjacencyList The adjacency list of the maze
-     * @param maze the maze on which the search is being performed
+     * @param maze          the maze on which the search is being performed
      * @return A array storing each node previously visited node or null is maze is impossible
      */
     public int[] bfs(HashMap<Integer, Set<Integer[]>> adjacencyList, int[][] maze) throws Exception {
         //tell user maze is being solved
         System.out.print("Solving");
-        for(int i = 0; i < 3; i++){
+        for (int i = 0; i < 3; i++) {
             Thread.sleep(500);
             System.out.print(".");
         }//end for loop
@@ -536,8 +539,9 @@ public class Main {
 
     /**
      * This method stores a adjacency list in a HashMap that is passed in based on the passed in grid
+     *
      * @param adjacencyList The HashMap in which the adjacency list is to be stored
-     * @param maze The maze on which the adjacency list should be based upon
+     * @param maze          The maze on which the adjacency list should be based upon
      */
     public void createAdjacencyList(HashMap<Integer, Set<Integer[]>> adjacencyList, int[][] maze) {
         //All possible moves from any spot
@@ -580,6 +584,7 @@ public class Main {
 
     /**
      * This method will return a random file path to one of the txt files that contain mazes
+     *
      * @return File path to one of the txt files
      */
     public String pickMaze() throws Exception {
@@ -599,6 +604,7 @@ public class Main {
 
     /**
      * This method reads the maze on the specified file path and prints it as it reads
+     *
      * @param filePath the path to the file in which the maze is
      * @return a 2D integer array containing the maze
      */
