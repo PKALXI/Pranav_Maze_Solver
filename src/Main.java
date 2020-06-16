@@ -536,9 +536,8 @@ public class Main {
 
     /**
      * This method stores a adjacency list in a HashMap that is passed in based on the passed in grid
-     *
      * @param adjacencyList The HashMap in which the adjacency list is to be stored
-     * @param maze          The maze on which the adjacency list should be based upon
+     * @param maze The maze on which the adjacency list should be based upon
      */
     public void createAdjacencyList(HashMap<Integer, Set<Integer[]>> adjacencyList, int[][] maze) {
         //All possible moves from any spot
@@ -581,7 +580,6 @@ public class Main {
 
     /**
      * This method will return a random file path to one of the txt files that contain mazes
-     *
      * @return File path to one of the txt files
      */
     public String pickMaze() throws Exception {
@@ -601,7 +599,6 @@ public class Main {
 
     /**
      * This method reads the maze on the specified file path and prints it as it reads
-     *
      * @param filePath the path to the file in which the maze is
      * @return a 2D integer array containing the maze
      */
@@ -674,7 +671,7 @@ public class Main {
 
     /**
      * This method prints a maze that is passed through
-     * @param maze    The maze to be printed
+     * @param maze The maze to be printed
      * @param intMaze The maze with integer nodes
      */
     public void printMaze(String[][] maze, int[][] intMaze) {
