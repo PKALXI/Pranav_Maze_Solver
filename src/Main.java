@@ -205,7 +205,6 @@ public class Main {
 
     /**
      * This method saves the maze passed in, into a text file
-     *
      * @param generatedMaze The maze you want to save
      */
     public void saveMaze(String[][] generatedMaze) throws Exception {
